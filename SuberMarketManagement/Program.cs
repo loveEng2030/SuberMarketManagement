@@ -11,43 +11,57 @@ internal class Program
     //-----------------------------------------------\\
     static void Main(string[] args)
     {
-        int choice;
-
-        ShowMenu();
-        choice =
-           GetChoice();
-        if (choice == 1)
-            CreatAccountAdmain();
-        else if (choice == 3)
-            LoginAdmain();
-
-        //ShowMenu();
-        choice = GetChoice();
-        if (choice == 2)
-            CreatAccountCostumer();
-
-        else if (choice == 4)
-            LoginCostumer();
-        else if (choice == 5)
-            ShowAllAccounts();
-        else if (choice == 6)
-        {
-            Console.WriteLine("\t\t\t\t\t Thank you for using our system ....");
-            return;
-        }
-
         while (true)
         {
-            MenuSuber();
-            int choise2 = GetChoMenuCustmer();
-            if (choise2 == 1)
-            {
-                MenuSuber();
+            ShowMenu();
+            int choice = GetChoice();
 
+            if (choice == 1) // Create Admin
+            {
+                CreatAccountAdmain();
+                MenuAdmain(); // يفتح قائمة الأدمن على طول
+                int cho = GetChoMenuAdmain();
+                // هنا هتعمل العمليات الخاصة بالأدمن
+            }
+            else if (choice == 2) // Create Customer
+            {
+                CreatAccountCostumer();
+                while (true)
+                {
+                    MenuSuber(); // يفتح قائمة المنتجات
+                    int choise2 = GetChoMenuCustmer();
+                    if (choise2 == 6) break; // خروج من منيو الزبون
+                }
+            }
+            else if (choice == 3) // Login Admin
+            {
+                LoginAdmain();
+                MenuAdmain(); // يفتح قائمة الأدمن بعد تسجيل الدخول
+                int cho = GetChoMenuAdmain();
+                // عمليات الأدمن
+            }
+            else if (choice == 4) // Login Customer
+            {
+                LoginCostumer();
+                while (true)
+                {
+                    MenuSuber(); // يفتح قائمة المنتجات
+                    int choise2 = GetChoMenuCustmer();
+                    if (choise2 == 6) break;
+                }
+            }
+            else if (choice == 5)
+            {
+                ShowAllAccounts();
+            }
+            else if (choice == 6)
+            {
+                Console.WriteLine("\t\t\t\t\t شكراً لاستخدامك النظام ❤️");
+                break;
             }
         }
-
     }
+
     //------------------------------------------------------\\
     // دالة عرض القائمة
     static void ShowMenu()
@@ -122,6 +136,14 @@ internal class Program
         Console.Write("\t\t\t\t\t ");
         Console.ResetColor();
         Passwords[accountCount] = Console.ReadLine();
+        while (Passwords[accountCount].Length<6) 
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\t\t\t\t\t Please enter a strong password..!\n");
+            Console.ResetColor();
+            Console.Write("\t\t\t\t\t ");
+            Passwords[accountCount] = Console.ReadLine();
+        }
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("\t\t\t\t\t Enter Gmail.. ");
         Console.Write("\t\t\t\t\t ");
@@ -162,6 +184,14 @@ internal class Program
         Console.Write("\t\t\t\t\t ");
         Console.ResetColor();
         Passwords[accountCount] = Console.ReadLine();
+        while (Passwords[accountCount].Length < 6)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\t\t\t\t\t Please enter a strong password..!\n");
+            Console.ResetColor();
+            Console.Write("\t\t\t\t\t ");
+            Passwords[accountCount] = Console.ReadLine();
+        }
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("\t\t\t\t\t Enter Gmail.. ");
         Console.Write("\t\t\t\t\t ");
@@ -181,11 +211,11 @@ internal class Program
         Console.WriteLine("\t\t\t\t\t Enter Phone Number.. ");
         Console.Write("\t\t\t\t\t ");
         Console.ResetColor();
-        Phones[accountCount] = Console.ReadLine();
+        //Phones[accountCount] = Console.ReadLine();
         //Console.Clear();
         accountCount++;
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("\t\t\t\t\t Account Created Successfully!");
+        Console.Write("\t\t\t\t\t Account Created Successfully!");
         Console.ResetColor();
     }
     //دالة تسجيل الدخول للادمن
@@ -304,13 +334,13 @@ internal class Program
         Console.WriteLine("\t\t\t\t|       Hello Dear In Subermarket KHire Thman..! |\n");
         Console.WriteLine("\t\t\t\t|------------------------------------------------|\n ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\t\t\t\t\t 1: اضافة منتج جديد .. ");
-        Console.WriteLine("\t\t\t\t\t 2: حذف منتج .. ");
-        Console.WriteLine("\t\t\t\t\t 3: عرض جميع المنتجات .. ");
+        Console.WriteLine("\t\t\t\t\t 1: add new product .. ");
+        Console.WriteLine("\t\t\t\t\t 2: delete product .. ");
+        Console.WriteLine("\t\t\t\t\t 3: viw all products .. ");
         //Console.WriteLine("\t\t\t\t\t 4:  .. ");
         //Console.WriteLine("\t\t\t\t\t 5: منتجات التسالي ");
         ////Console.WriteLine("\t\t\t\t\t 4:  ");
-        //Console.WriteLine("\t\t\t\t\t 6: Exit .. \n");
+        Console.WriteLine("\t\t\t\t\t 4: Exit .. \n");
         //Console.WriteLine("\t\t\t\t\t Please Enter Choice .. \n");
         //Console.WriteLine("\t\t\t\t\t ");
         //Console.Write("\t\t\t\t\t ");
@@ -320,10 +350,10 @@ internal class Program
     static int GetChoMenuAdmain()
     {
         int cho;
-        while (!int.TryParse(Console.ReadLine(), out cho) || cho < 1 || cho > 3)
+        while (!int.TryParse(Console.ReadLine(), out cho) || cho < 1 || cho > 4)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\t\t\t\t\t Please Enter a Valid Choice (1-3) ..");
+            Console.WriteLine("\t\t\t\t\t Please Enter a Valid Choice (1-4) ..");
             Console.ResetColor();
             Console.Write("\t\t\t\t\t ");
 
