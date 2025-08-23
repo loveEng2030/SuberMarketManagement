@@ -1,0 +1,15 @@
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\bin\Debug\net8.0\SuberMarketManagement.exe
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\bin\Debug\net8.0\SuberMarketManagement.deps.json
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\bin\Debug\net8.0\SuberMarketManagement.runtimeconfig.json
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\bin\Debug\net8.0\SuberMarketManagement.dll
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\bin\Debug\net8.0\SuberMarketManagement.pdb
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\SuberMarketManagement.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\SuberMarketManagement.AssemblyInfoInputs.cache
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\SuberMarketManagement.AssemblyInfo.cs
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\SuberMarketManagement.csproj.CoreCompileInputs.cache
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\SuberMarketManagement.sourcelink.json
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\SuberMarketManagement.dll
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\refint\SuberMarketManagement.dll
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\SuberMarketManagement.pdb
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\SuberMarketManagement.genruntimeconfig.cache
+C:\Users\amr\source\repos\SuberMarketManagement\SuberMarketManagement\obj\Debug\net8.0\ref\SuberMarketManagement.dll
