@@ -1,8 +1,6 @@
-﻿using System;
-
-internal class Program
+﻿internal class Program
 {
-    // تخزين البيانات في Arrays 
+    // تخزين بيانات العميل في Arrays 
     static string[] NamesCustmer = new string[10000];
     static string[] PasswordsCustmer = new string[10000];
     static string[] EmailsCustmer = new string[10000];
@@ -17,7 +15,7 @@ internal class Program
     static string AdminPhone;
     static int accountCountAdmin = 0;
     ///*************************************************************************\\
-    ///ارري فيها المنتجات 
+    ///اراي فيها المنتجات 
     static string[] productNames = new string[1000];
     static int[] productPrices = new int[1000];
     static int[] productQuantities = new int[1000];
@@ -26,14 +24,14 @@ internal class Program
     //static int productCount = productNames.Length;
     //--------------------------
 
-    static string[] Cart = new string[productNames.Length];
-    static int cartCount = 0;
+    static string[] Cart = new string[productNames.Length]; // لتخزين منتجات العميل
+    static int cartCount = 0; // عدد المنتجات في السلة
 
     //*//*/*/*/*/*/*//*//*//*/*/*/*/*/*/*/*/*/*/**//*/*/*/*//*/*/*/*/*/*////*/*/*/*/*//*/*/*/*/*/*/*/*/*/*/*/*/*\\
     static void Main(string[] args)
 
     {
-        AddInitialProducts();
+        AddInitialProducts(); // اضافة بعض المنتجات الموجودة
         while (true)
         {
             ShowMenu();
@@ -73,7 +71,7 @@ internal class Program
                     Console.Clear();
                     MenuSuber();
                     int choise2 = GetChoMenuCustmer();
-                    if (choise2 == 8) break;
+                    if (choise2 == 9) break;
                     product(choise2); //  تمرير الاختيار
                 }
             }
@@ -119,7 +117,7 @@ internal class Program
     static int GetChoice()
     {
         int choice;
-        while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 6)
+        while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 6) // رقم من 1 ل 6
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\t\t\t\t\t Please Enter a Valid Choice (1-6) ..");
@@ -146,9 +144,12 @@ internal class Program
         Console.ForegroundColor = ConsoleColor.Green;
         for (int i = 0; i < accountCountCustmer; i++)
         {
-            Console.WriteLine($"\t\t\t\t\t  حسابات الزباىن \n {i + 1} Name: {NamesCustmer[i]}\n\t\t\t\t\t Email: {EmailsCustmer[i]}\n\t\t\t\t\t" +
-                $" Phone: {PhonesCustmer[i]}\n\t\t\t\t\t Password: {PasswordsCustmer[i]}\n\t\t\t\t\t ------------------------ \n\n");
-
+            Console.WriteLine($"\t\t\t\t\t حساب رقم {i + 1}");
+            Console.WriteLine($"\t\t\t\t\t Name     : {NamesCustmer[i]}");
+            Console.WriteLine($"\t\t\t\t\t Email    : {EmailsCustmer[i]}");
+            Console.WriteLine($"\t\t\t\t\t Phone    : {(string.IsNullOrEmpty(PhonesCustmer[i]) ? "N/A" : PhonesCustmer[i])}");
+            Console.WriteLine($"\t\t\t\t\t Password : {PasswordsCustmer[i]}");
+            Console.WriteLine("\t\t\t\t\t ------------------------\n");
         }
         Console.ResetColor();
     }
@@ -208,7 +209,9 @@ internal class Program
         accountCountAdmin++;
 
     }
+
     //دالة انشاء حساب  للزبون
+    // نفس الأدمن ولكن بنخزن البيانات في array
     static void CreatAccountCostumer()
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
@@ -245,10 +248,11 @@ internal class Program
         }
 
         Console.ForegroundColor = ConsoleColor.Cyan;
-        //Console.WriteLine("\t\t\t\t\t Enter Phone Number.. ");
-        //Console.Write("\t\t\t\t\t ");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("\t\t\t\t\t Enter Phone Number.. ");
+        Console.Write("\t\t\t\t\t ");
         Console.ResetColor();
-        //Phones[accountCount] = Console.ReadLine();
+        PhonesCustmer[accountCountCustmer] = Console.ReadLine();
         //Console.Clear();
         accountCountCustmer++;
         Console.ForegroundColor = ConsoleColor.Green;
@@ -271,24 +275,18 @@ internal class Program
         string password = Console.ReadLine();
         Console.Write("\t\t\t\t\t ");
 
-        bool found = false;
-        for (int i = 0; i < accountCountAdmin; i++)
+        if (AdminName == name && AdminPassword == password)
         {
-            if (AdminName == name && AdminPassword == password)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(" \t\t\t\t\t Login Successful! Welcome " + name);
-                Console.ResetColor();
-                found = true;
-                break;
-            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\t\t\t\t\t Login Successful! Welcome " + name);
+            Console.ResetColor();
         }
-
-        if (!found)
+        else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\t\t\t\t\t Wrong Name or Password!");
+            Console.WriteLine("\t\t\t\t\t Invalid Name or Password! Try Again.");
             Console.ResetColor();
+
 
             Console.WriteLine("\t\t\t\t\t Do you want to create a new Admin account? (y/n)");
             Console.Write("\t\t\t\t\t ");
@@ -467,11 +465,11 @@ internal class Program
                 Console.WriteLine("\t\t\t\t\t Shampoo - 50 EGP - Qty: 30");
                 BuyProducts();
                 break;
-                case 8:
+            case 8:
                 BuyProducts();
-                    break;
-                case 9:
-                  return ;
+                break;
+            case 9:
+                return;
 
             default:
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -588,7 +586,7 @@ internal class Program
             Console.WriteLine("\t\t\t\t\t Please Enter a Valid Quantity (1-100) ..");
             Console.ResetColor();
             Console.Write("\t\t\t\t\t Enter quantity again: ");
-            quantity = int.Parse(Console.ReadLine()); 
+            quantity = int.Parse(Console.ReadLine());
         }
 
         // حفظ المنتج
@@ -634,7 +632,7 @@ internal class Program
         {
             Console.WriteLine("\t\t\t\t\t Product not found!");
         }
-        Console.ResetColor ();
+        Console.ResetColor();
     }
     // للادمن دالة عرض كل المنتجات
     static void DisplayProducts()
@@ -648,56 +646,119 @@ internal class Program
     //عرض المنتجات للزبون
     static void ShowProducts()
     {
-        Console.WriteLine("\n\t\t\t\t Product List:\n");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("\n\t\t\t\t\t === Available Products ===\n");
+        Console.ResetColor();
 
-        for (int i = 0; i < productNames.Length; i++)
+        if (productCount == 0)
         {
-            Console.WriteLine($"\t\t\t\t {i + 1}: {productNames[i]}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\t\t\t\t\t No products available right now.");
+            Console.ResetColor();
+            return;
         }
-        Console.WriteLine("\t\t\t\t 0: Show Cart & Exit\n");
+
+        for (int i = 0; i < productCount; i++)
+        {
+            Console.WriteLine($"\t\t\t\t\t {i + 1}) {productNames[i]} - {productPrices[i]} EGP - Qty: {productQuantities[i]}");
+        }
     }
     //دالة شراء المنتجات
     static void BuyProducts()
     {
-        //while (true)
-        {
-            ShowProducts();
-            Console.Write("\t\t\t\t Choose Product Number: ");
-            int choice;
-            if (!int.TryParse(Console.ReadLine(), out choice))
-                //continue;
+        int choice;
 
-            if (choice == 0) // Show cart & exit
+        while (true)
+        {
+            Console.Clear();
+            ShowProducts();
+
+            Console.WriteLine("\n\t\t\t\t\t Enter Product Number to Buy (0 to Show Cart / 9 to Return to Menu):");
+            Console.Write("\t\t\t\t\t ");
+
+            // التحقق من إدخال صحيح
+            if (!int.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\t\t\t\t\t Invalid Input! Please enter a number.");
+                Console.ResetColor();
+                continue;
+            }
+
+            // الرجوع للقائمة الرئيسية
+            if (choice == 9)
+                break;
+
+            // عرض السلة مباشرة
+            if (choice == 0)
             {
                 ShowCart();
-                //break;
+                Console.WriteLine("\t\t\t\t\t Press any key to return...");
+                Console.ReadKey();
+                continue;
             }
-            else if (choice >= 1 && choice <= productNames.Length)
-            {
-                Cart[cartCount] = productNames[choice - 1];
-                cartCount++;
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\t\t\t\t {productNames[choice - 1]} Added to Cart.");
-                Console.ResetColor();
+            // التحقق من صحة رقم المنتج
+            if (choice > 0 && choice <= productCount)
+            {
+                // التحقق من المخزون
+                if (productQuantities[choice - 1] > 0)
+                {
+                    Cart[cartCount] = productNames[choice - 1];
+                    cartCount++;
+
+                    productQuantities[choice - 1]--; // تقليل الكمية بعد الشراء
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"\t\t\t\t\t {productNames[choice - 1]} Added to Cart.");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\t\t\t\t\t Sorry, this product is out of stock!");
+                    Console.ResetColor();
+                }
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\t\t\t\t Invalid Choice!");
+                Console.WriteLine("\t\t\t\t\t Invalid Choice!");
                 Console.ResetColor();
             }
+
+            Console.WriteLine("\n\t\t\t\t\t Do you want to buy another product? (Y/N): ");
+            string again = Console.ReadLine().ToUpper();
+            if (again != "Y")
+                break;
         }
     }
     //دالة رؤية السلة
     static void ShowCart()
     {
-        Console.WriteLine("\n\t\t\t\t Your Cart:\n");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("\n\t\t\t\t\t === Your Cart ===\n");
+        Console.ResetColor();
+
+        if (cartCount == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\t\t\t\t\t Your cart is empty!");
+            Console.ResetColor();
+            return;
+        }
+
+        int totalPrice = 0;
+
         for (int i = 0; i < cartCount; i++)
         {
-            Console.WriteLine($"\t\t\t\t {i + 1}: {Cart[i]}");
+            int index = Array.IndexOf(productNames, Cart[i]);
+            Console.WriteLine($"\t\t\t\t\t {i + 1}) {Cart[i]} - {productPrices[index]} EGP");
+            totalPrice += productPrices[index];
         }
-        Console.WriteLine($"\t\t\t\t -------------------------");
-        Console.WriteLine($"\t\t\t\t Total Items: {cartCount}\n");
+
+        Console.WriteLine("\t\t\t\t\t -------------------------");
+        Console.WriteLine($"\t\t\t\t\t Total Items: {cartCount}");
+        Console.WriteLine($"\t\t\t\t\t Total Price: {totalPrice} EGP");
     }
 }
